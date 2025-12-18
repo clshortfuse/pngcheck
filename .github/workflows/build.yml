@@ -74,7 +74,7 @@ jobs:
       if: matrix.os == 'ubuntu' || matrix.os == 'macos'
       run: |
         cmake -B build-cmake \
-          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_BUILD_TYPE=Release
         cmake --build build-cmake --config Release
 
     - name: Build with CMake (Windows MSVC)
@@ -89,7 +89,7 @@ jobs:
       run: |
         cmake -B build-cmake \
           -G "MSYS Makefiles" \
-          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_BUILD_TYPE=Release
         cmake --build build-cmake --config Release
 
     - name: Test CMake build (Windows MSVC)
