@@ -109,3 +109,26 @@ jobs:
       if: matrix.os == 'ubuntu' || matrix.os == 'macos'
       run: |
         ./build-cmake/pngcheck -h
+    - name: Upload artifacts (Windows MSVC)
+      if: matrix.os == 'windows'
+      uses: actions/upload-artifact@v4
+      with:
+        name:  pngcheck-${{ matrix.name }}
+        path: build-cmake/Release/pngcheck.exe
+        if-no-files-found: error
+
+    - name: Upload artifacts (Windows GCC)
+      if: matrix.os == 'windows-msys2'
+      uses: actions/upload-artifact@v4
+      with:
+        name: pngcheck-${{ matrix.name }}
+        path: build-cmake/pngcheck. exe
+        if-no-files-found: error
+
+    - name: Upload artifacts (Ubuntu/macOS)
+      if: matrix.os == 'ubuntu' || matrix. os == 'macos'
+      uses: actions/upload-artifact@v4
+      with: 
+        name: pngcheck-${{ matrix.name }}
+        path: build-cmake/pngcheck
+        if-no-files-found: error
