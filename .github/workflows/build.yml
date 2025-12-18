@@ -75,7 +75,6 @@ jobs:
       run: |
         cmake -B build-cmake \
           -DCMAKE_BUILD_TYPE=Release \
-          -DPNGCHECK_USE_SYSTEM_ZLIB=ON
         cmake --build build-cmake --config Release
 
     - name: Build with CMake (Windows MSVC)
@@ -91,7 +90,6 @@ jobs:
         cmake -B build-cmake \
           -G "MSYS Makefiles" \
           -DCMAKE_BUILD_TYPE=Release \
-          -DPNGCHECK_USE_SYSTEM_ZLIB=ON
         cmake --build build-cmake --config Release
 
     - name: Test CMake build (Windows MSVC)
@@ -109,12 +107,13 @@ jobs:
       if: matrix.os == 'ubuntu' || matrix.os == 'macos'
       run: |
         ./build-cmake/pngcheck -h
+
     - name: Upload artifacts (Windows MSVC)
       if: matrix.os == 'windows'
       uses: actions/upload-artifact@v4
       with:
-        name:  pngcheck-${{ matrix.name }}
-        path: build-cmake/Release/pngcheck.exe
+        name: pngcheck-${{ matrix.name }}
+        path: build-cmake/Release/
         if-no-files-found: error
 
     - name: Upload artifacts (Windows GCC)
@@ -122,11 +121,11 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: pngcheck-${{ matrix.name }}
-        path: build-cmake/pngcheck. exe
+        path: build-cmake/
         if-no-files-found: error
 
     - name: Upload artifacts (Ubuntu/macOS)
-      if: matrix.os == 'ubuntu' || matrix. os == 'macos'
+      if: matrix.os == 'ubuntu' || matrix.os == 'macos'
       uses: actions/upload-artifact@v4
       with: 
         name: pngcheck-${{ matrix.name }}
